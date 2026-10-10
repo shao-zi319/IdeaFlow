@@ -1,0 +1,80 @@
+:root { --accent: #0078d4; }
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-app: #f2f1f0;
+  --bg-sidebar: #faf9f8;
+  --bg-card: #ffffff;
+  --bg-panel: #ffffff;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --bg-active: rgba(0, 0, 0, 0.08);
+  --text-primary: #252423;
+  --text-secondary: #605e5c;
+  --text-tertiary: #a19f9d;
+  --border: #e1dfdd;
+  --divider: rgba(0, 0, 0, 0.06);
+  --checkbox-border: #8a8886;
+  --scrollbar: rgba(0, 0, 0, 0.22);
+  --shadow-card: 0 1.6px 3.6px rgba(0, 0, 0, 0.07), 0 0.3px 0.9px rgba(0, 0, 0, 0.06);
+  --panel-shadow: -8px 0 24px rgba(0, 0, 0, 0.16);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-app: #1f2225;
+  --bg-sidebar: #191c1f;
+  --bg-card: #282c30;
+  --bg-panel: #23272a;
+  --bg-hover: rgba(255, 255, 255, 0.07);
+  --bg-active: rgba(255, 255, 255, 0.13);
+  --text-primary: #f3f2f1;
+  --text-secondary: #b8b5b2;
+  --text-tertiary: #8d8a87;
+  --border: #3f4449;
+  --divider: rgba(255, 255, 255, 0.09);
+  --checkbox-border: #a3a09d;
+  --scrollbar: rgba(255, 255, 255, 0.22);
+  --shadow-card: 0 1.6px 3.6px rgba(0, 0, 0, 0.42), 0 0.3px 0.9px rgba(0, 0, 0, 0.36);
+  --panel-shadow: -8px 0 28px rgba(0, 0, 0, 0.55);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  overflow: hidden;
+  font-size: 14px;
+}
+
+button { font-family: inherit; font-size: inherit; border: none; background: none; color: inherit; cursor: pointer; }
+input, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+.placeholder { color: var(--text-tertiary); font-size: 13px; }
+
+/* ---------- 阶段五：主题切换与动效过渡统一 ---------- */
+body { transition: background 0.3s ease, color 0.3s ease; }
+.main { transition: background 0.35s ease; }
+
+.nav-item, .idea-item, .chip, .status-chip, .sm-chip, .tag-chip, .engine-btn,
+.import-btn, .gen-btn, .sort-btn, .batch-toggle, .batch-status, .foot-btn,
+.menu-btn, .search-clear, .inline-input, .kv-input, .checkbox, .step-del, .ref-del {
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.sidebar, .detail-panel, .sidebar-footer, .search-box, .quick-add, .idea-list, .batch-bar {
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}

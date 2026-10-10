@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IdeaFlow · 灵感表</title>
+  <meta name="description" content="IdeaFlow 灵感表 —— 先捕捉、后深化、再推进的灵感管理工具。像微软 To Do 一样随手速记，用构思框架展开灵感，用五态项目管线推进到落地。零依赖、零构建、本地存储。" />
+  <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#22262a" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6cbd'/%3E%3Cpath d='M16 6l3.2 7.3 7.8.7-5.9 5.1 1.8 7.6L16 22.9l-6.9 3.8 1.8-7.6L5 14l7.8-.7z' fill='%23fff'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+<div class="app" id="app">
+
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="搜索（/）" />
+        <button class="search-clear" id="searchClear" title="清除搜索" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <nav class="smart-lists" id="smartLists" aria-label="智能列表"></nav>
+
+    <div class="group-section">
+      <div class="group-section-header">我的分组</div>
+      <nav class="group-list" id="groupList" aria-label="自定义分组"></nav>
+      <button class="new-group-btn" id="newGroupBtn" title="新建分组">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg>
+        <span>新建分组</span>
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="theme-toggle" id="themeToggle" title="切换主题"></button>
+      <span class="toolbar-flex"></span>
+      <button class="foot-btn" id="exportBtn" title="导出 JSON 备份"></button>
+      <button class="foot-btn" id="importBtn" title="从 JSON 备份导入"></button>
+    </div>
+  </aside>
+
+  <main class="main" id="mainArea">
+    <button class="menu-btn" id="menuBtn" aria-label="打开侧边栏">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="main-inner">
+      <header class="main-header">
+        <h1 id="listTitle">全部</h1>
+        <div class="main-subtitle" id="listSubtitle"></div>
+      </header>
+      <div class="quick-add">
+        <button class="qa-circle" id="quickAddBtn" title="添加灵感（回车）" aria-label="添加灵感">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg>
+        </button>
+        <input type="text" id="quickAddInput" placeholder="添加灵感" />
+      </div>
+      <div class="list-toolbar">
+        <button class="sort-btn" id="sortBtn" title="切换排序方式"></button>
+        <span class="sort-hint" id="sortHint"></span>
+        <span class="toolbar-flex"></span>
+        <button class="batch-toggle" id="batchToggle" title="批量流转灵感状态">批量流转</button>
+      </div>
+      <div class="batch-bar" id="batchBar"></div>
+      <div class="idea-list" id="ideaList"></div>
+    </div>
+  </main>
+
+  <div class="panel-backdrop" id="panelBackdrop"></div>
+  <aside class="detail-panel" id="detailPanel" aria-label="灵感详情">
+    <div class="panel-content" id="panelContent"></div>
+  </aside>
+
+  <div class="undo-toast" id="undoToast"></div>
+
+</div>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

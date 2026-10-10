@@ -1,0 +1,150 @@
+.app {
+  display: flex;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- 左侧边栏 ---------- */
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-top { padding: 12px 12px 4px; }
+
+.smart-lists { padding: 6px 0; overflow-y: auto; }
+
+.group-section { flex: 1; min-height: 0; overflow-y: auto; padding: 6px 0; }
+.group-section-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  padding: 10px 22px 6px;
+}
+
+.sidebar-footer {
+  padding: 10px 14px;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- 阶段五：窄屏抽屉骨架 ---------- */
+.menu-btn {
+  display: none;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 20;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.menu-btn:hover { background: var(--bg-active); }
+
+.nav-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.nav-backdrop.show { opacity: 1; pointer-events: auto; }
+
+/* 主列表区 */
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  position: relative;
+  background: var(--bg-app);
+}
+@supports (background: color-mix(in srgb, red 10%, white)) {
+  .main { background: color-mix(in srgb, var(--accent) 5%, var(--bg-app)); }
+}
+
+.main-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 44px 40px 120px;
+}
+
+/* ---------- 详情面板（二级界面） ---------- */
+.panel-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.32);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.panel-backdrop.show { opacity: 1; pointer-events: auto; }
+
+.detail-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  width: 440px;
+  max-width: 92vw;
+  background: var(--bg-panel);
+  box-shadow: var(--panel-shadow);
+  transform: translateX(103%);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+.detail-panel.open { transform: translateX(0); }
+
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 28px 60px;
+}
+
+/* ================= 阶段五：响应式 ================= */
+/* 窄屏（<=900px）：侧栏变抽屉 */
+@media (max-width: 900px) {
+  .menu-btn { display: flex; }
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 30;
+    width: 290px;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.3, 1);
+    box-shadow: var(--panel-shadow);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .main-inner { max-width: 720px; padding: 60px 24px 100px; }
+  .detail-panel { width: 400px; }
+}
+
+/* 手机（<=640px）：单栏全宽 */
+@media (max-width: 640px) {
+  .sidebar { width: 84vw; max-width: 320px; }
+  .main-inner { padding: 58px 16px 90px; }
+  .main-header { margin-bottom: 16px; }
+  .main-header h1 { font-size: 24px; }
+  .detail-panel { width: 100%; max-width: 100%; }
+  .panel-content { padding: 16px 18px 60px; }
+  .quick-add { padding: 11px 12px; }
+  .idea-item { padding: 12px 12px; }
+  .undo-toast { bottom: 16px; white-space: normal; }
+}
